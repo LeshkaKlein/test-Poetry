@@ -2,23 +2,14 @@
 
 from masks import get_mask_card_number, get_mask_account
 
-# Импорт модуля re
-import re
+def mask_account_card(info_user: str) -> str:
+    """Функция обработки введенных данных Счет или Карта
+    и вывода замаскированной информации"""
 
-def mask_account_card(account_card: str) -> str:
-    """
-    Принимает один аргумент — строку, содержащую тип и номер карты или счета,
-     и возвращает строку с замаскированным номером.
-    """
-
-    if "Счет" in account_card:
-        letters_count = "".join(re.findall(r"\D+", account_card))
-        numbers_count =  "".join(re.findall(r"\d+", account_card))
-        return f"{letters_count} {get_mask_account(numbers_count)}"
+    if "Счет" in info_user:
+        return get_mask_card_number(info_user)
     else:
-        letters_card = "".join(re.findall(r"\D+", account_card))
-        numbers_card = "".join(re.findall(r"\d+", account_card))
-        return f"{letters_card} {get_mask_card_number(numbers_card)}"
+        return get_mask_account(info_user)
 
 
 # Импорт модуля datetime
@@ -30,3 +21,5 @@ def get_date(date: str) -> str:
     '"""
     date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
     return date.strftime("%d.%m.%Y")
+
+
