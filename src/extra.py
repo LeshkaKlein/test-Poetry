@@ -1,8 +1,8 @@
-from masks import get_mask_card_number, get_mask_account
-
+from src.masks import get_mask_card_number, get_mask_account
 
 # Импорт модуля re
 import re
+
 
 def mask_account_card(account_card: str) -> str:
     """
@@ -12,7 +12,7 @@ def mask_account_card(account_card: str) -> str:
 
     if "Счет" in account_card:
         letters_count = "".join(re.findall(r"\D+", account_card))
-        numbers_count =  "".join(re.findall(r"\d+", account_card))
+        numbers_count = "".join(re.findall(r"\d+", account_card))
         return f"{letters_count} {get_mask_account(numbers_count)}"
     else:
         letters_card = "".join(re.findall(r"\D+", account_card))
